@@ -1,0 +1,16 @@
+class Student:
+    firstname: str
+    lastname: str
+    classname: str
+    age: int
+
+    # Constructor
+    def __init__(self, firstname: str, lastname: str, classname: str, age: int):
+        self.firstname = firstname
+        self.lastname = lastname
+        self.classname = classname
+        self.age = age
+
+    def __str__(self) -> str:
+        formatString = "Firstname: {} \nLastname: {} \nClass: {} \nAge: {} \n"
+        return formatString.format(self.firstname, self.lastname, self.classname, self.age)
