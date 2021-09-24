@@ -11,6 +11,7 @@ class Student:
         self.classname = classname
         self.age = age
 
+    #tostring
     def __str__(self) -> str:
         formatString = "Firstname: {} \nLastname: {} \nClass: {} \nAge: {} \n"
         return formatString.format(self.firstname, self.lastname, self.classname, self.age)
