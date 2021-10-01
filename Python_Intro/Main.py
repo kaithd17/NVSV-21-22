@@ -2,6 +2,7 @@ from Student import Student
 
 studentList = list()
 
+
 def createStudent():
     firstname = input("Please enter the firstname of the student: ")
     lastname = input("Please enter the lastname of the student: ")
@@ -29,32 +30,43 @@ def editStudent():
         print("You have to create a student first!\n")
         return
     else:
-        print("What student do you want to change?\n")
-        showAllStudents()
-        studentIndex = int(input("Please choose a student: "))
-        student: Student = studentList[studentIndex-1]
-
-        print("What do you want to change?\n")
-        print("[1] Firstname\n[2] Lastname\n[3] Classname\n[4] Age\n[5] Nothing")
-        number = int(input("Please choose a number: "))
-        if number == 1:
-            firstname = input("Please enter the new firstname of the student: ")
-            student.firstname = firstname
-        elif number == 2:
-            lastname = input("Please enter the new lastname of the student: ")
-            student.lastname = lastname
-        elif number == 3:
-            classname = input("Please enter the new class of the student: ")
-            student.classname = classname    
-        elif number == 4:
+        while True:
+            print("What student do you want to change?\n")
+            showAllStudents()
             try:
-                age: int = int(input("Please enter the new age of the student: "))
-                student.age = age 
+                studentIndex = int(input("Please choose a student: "))
+                student: Student = studentList[studentIndex-1]
+            except (ValueError, IndexError):
+                print("\nInvalid number!\n")
+
+            print("What do you want to change?\n")
+            print("[1] Firstname\n[2] Lastname\n[3] Classname\n[4] Age\n[5] Nothing")
+
+        
+            try:
+                number = int(input("Please choose a number: "))
+                if number == 1:
+                    firstname = input("Please enter the new firstname of the student: ")
+                    student.firstname = firstname
+                elif number == 2:
+                    lastname = input("Please enter the new lastname of the student: ")
+                    student.lastname = lastname
+                elif number == 3:
+                    classname = input("Please enter the new class of the student: ")
+                    student.classname = classname    
+                elif number == 4:
+                    try:
+                        age: int = int(input("Please enter the new age of the student: "))
+                        student.age = age 
+                    except ValueError:
+                        print("Invalid age!\n")
+                elif number == 5:
+                    return
+                else:
+                    print("\nInvalid number!\n")
             except ValueError:
-                print("Invalid age!\n")
-        elif number == 5:
-            return
-        print("Student successfully edited!\n")
+                print("\nPlease enter a number!\n")
+
 
 def deleteStudent():
     print("Which student do you want to delete?\n")
@@ -64,7 +76,6 @@ def deleteStudent():
     student: Student = studentList[studentIndex-1]
     studentList.remove(student)
     print("Student successfully deleted!\n")
-
 
 
 def studentMenu():
