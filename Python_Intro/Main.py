@@ -2,19 +2,25 @@ from Student import Student
 
 studentList = list()
 
-
 def createStudent():
-    firstname = input("Please enter the firstname of the student: ")
-    lastname = input("Please enter the lastname of the student: ")
-    classname = input("Please enter the class of the student: ")
-    try:
-        age: int = int(input("Please enter the age of the student: "))
-    except ValueError:
-        print("Invalid age!\n")
-        return
-    student: Student = Student(firstname, lastname, classname, age)
-    studentList.append(student)
-    print("Student successfully created!\n")
+    finished: bool
+    while True:
+        firstname = input("Please enter the firstname of the student: ")
+        lastname = input("Please enter the lastname of the student: ")
+        classname = input("Please enter the class of the student: ")
+
+        try:
+            finished = True
+            age: int = int(input("Please enter the age of the student: "))
+            student: Student = Student(firstname, lastname, classname, age)
+            studentList.append(student)
+        except (ValueError, UnboundLocalError):
+            print("Invalid age!\n")
+            finished = False
+
+        if finished:
+            print("Student successfully created!\n")
+            return
 
 
 def showAllStudents():
@@ -26,11 +32,14 @@ def showAllStudents():
 
 
 def editStudent():
+    valid: bool
+
     if len(studentList) == 0:
         print("You have to create a student first!\n")
         return
     else:
         while True:
+            valid = True
             print("What student do you want to change?\n")
             showAllStudents()
             try:
@@ -38,44 +47,63 @@ def editStudent():
                 student: Student = studentList[studentIndex-1]
             except (ValueError, IndexError):
                 print("\nInvalid number!\n")
+                valid = False
 
-            print("What do you want to change?\n")
-            print("[1] Firstname\n[2] Lastname\n[3] Classname\n[4] Age\n[5] Nothing")
+            if valid:
+                print("What do you want to change?\n")
+                print("[1] Firstname\n[2] Lastname\n[3] Classname\n[4] Age\n[5] Nothing")
 
-        
-            try:
-                number = int(input("Please choose a number: "))
-                if number == 1:
-                    firstname = input("Please enter the new firstname of the student: ")
-                    student.firstname = firstname
-                elif number == 2:
-                    lastname = input("Please enter the new lastname of the student: ")
-                    student.lastname = lastname
-                elif number == 3:
-                    classname = input("Please enter the new class of the student: ")
-                    student.classname = classname    
-                elif number == 4:
-                    try:
-                        age: int = int(input("Please enter the new age of the student: "))
-                        student.age = age 
-                    except ValueError:
-                        print("Invalid age!\n")
-                elif number == 5:
+                finished: bool = True
+                try:
+                    number = int(input("Please choose a number: "))
+                    if number == 1:
+                        firstname = input("Please enter the new firstname of the student: ")
+                        student.firstname = firstname
+                    elif number == 2:
+                        lastname = input("Please enter the new lastname of the student: ")
+                        student.lastname = lastname
+                    elif number == 3:
+                        classname = input("Please enter the new class of the student: ")
+                        student.classname = classname    
+                    elif number == 4:
+                        try:
+                            age: int = int(input("Please enter the new age of the student: "))
+                            student.age = age 
+                        except ValueError:
+                            print("Invalid age!\n")
+                            finished = False
+                    elif number == 5:
+                        return
+                    else:
+                        print("\nInvalid number!\n")
+                        finished = False
+                except ValueError:
+                    print("\nPlease enter a number!\n")
+                    finished = False
+
+                if finished:
+                    print("Student successfully edited!\n")
                     return
-                else:
-                    print("\nInvalid number!\n")
-            except ValueError:
-                print("\nPlease enter a number!\n")
 
 
 def deleteStudent():
-    print("Which student do you want to delete?\n")
-    showAllStudents()
+    valid: bool
+    while True:
+        valid = True
+        print("Which student do you want to delete?\n")
+        showAllStudents()
 
-    studentIndex = int(input("Please choose a student: "))
-    student: Student = studentList[studentIndex-1]
-    studentList.remove(student)
-    print("Student successfully deleted!\n")
+        try:
+            studentIndex = int(input("Please choose a student: "))
+            student: Student = studentList[studentIndex-1]
+            studentList.remove(student)
+        except (ValueError, IndexError):
+            print("\nInvalid number!\n")
+            valid = False
+
+        if valid:
+            print("Student successfully deleted!\n")
+            return
 
 
 def studentMenu():
@@ -83,6 +111,7 @@ def studentMenu():
     while True:
         print("\t***Menu***")
         print("[1] Create Student\n[2] Show All Students\n[3] Edit Student\n[4] Delete Student\n[5] Exit")
+
         try:
             number = int(input("Please choose a number: "))
             print("\n")
@@ -96,7 +125,7 @@ def studentMenu():
                 deleteStudent()
             elif number == 5:
                 print("Thanks for using my software :)")
-                break
+                return
             else:
                 print("\nInvalid number!\n")
         except ValueError:
