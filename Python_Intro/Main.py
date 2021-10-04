@@ -131,6 +131,23 @@ def studentMenu():
         except ValueError:
             print("\nPlease enter a number!\n")
 
+def readFile():
+    file = open("students.csv", "r")
+    while True:
+        studentString: str = file.readline()
+        if studentString == "":
+           break
+        student: Student = Student(studentString.split(";")[0], studentString.split(";")[1], studentString.split(";")[2], int(studentString.split(";")[3].replace("\n","")))
+        studentList.append(student)
+    file.close()
+
+def writeFile():
+    file = open("students.csv", "w")
+    for student in studentList:
+        file.write("{};{};{};{}\n".format(student.firstname, student.lastname, student.classname, student.age))
+    file.close()
 
 if __name__ == '__main__':
+    readFile()
     studentMenu()
+    writeFile()

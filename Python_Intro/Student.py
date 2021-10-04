@@ -13,5 +13,5 @@ class Student:
 
     #tostring
     def __str__(self) -> str:
-        formatString = "{} {} {} {}\t\n"
+        formatString = "{} {} {} {}\n"
         return formatString.format(self.firstname, self.lastname, self.classname, self.age)
