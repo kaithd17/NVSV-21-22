@@ -25,7 +25,7 @@ def createStudent():
 
 def showAllStudents():
     counter = int(1)
-    print("\tFirstname - Lastname - Class - Age\n")
+    print("Firstname - Lastname - Class - Age\n")
     for student in studentList:
         print("[{}] {}\n".format(counter, student))
         counter = counter + 1
@@ -88,22 +88,26 @@ def editStudent():
 
 def deleteStudent():
     valid: bool
-    while True:
-        valid = True
-        print("Which student do you want to delete?\n")
-        showAllStudents()
+    if len(studentList) == 0:
+        print("You have to create a student first!\n")
+        return
+    else:
+        while True:
+            valid = True
+            print("Which student do you want to delete?\n")
+            showAllStudents()
 
-        try:
-            studentIndex = int(input("Please choose a student: "))
-            student: Student = studentList[studentIndex-1]
-            studentList.remove(student)
-        except (ValueError, IndexError):
-            print("\nInvalid number!\n")
-            valid = False
+            try:
+                studentIndex = int(input("Please choose a student: "))
+                student: Student = studentList[studentIndex-1]
+                studentList.remove(student)
+            except (ValueError, IndexError):
+                print("\nInvalid number!\n")
+                valid = False
 
-        if valid:
-            print("Student successfully deleted!\n")
-            return
+            if valid:
+                print("Student successfully deleted!\n")
+                return
 
 
 def studentMenu():
