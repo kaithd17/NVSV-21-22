@@ -20,7 +20,7 @@ async def hello():
         await websocket.send(name)
         print(f">>> {name}")
 
-        #We get a respones from the sever
+        #We get a response from the sever
         greeting = await websocket.recv()
         print(f"<<< {greeting}")
 
