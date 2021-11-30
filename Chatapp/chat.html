@@ -2,8 +2,69 @@
 <html>
     <head>
         <title>Chatapp</title>
+        <script src="chat.js"></script>
+        <link rel="stylesheet" type="text/css" href="styles.css">
     </head>
     <body>
-        <h1>Chat</h1>
+        <div class="registerContainer">
+            <div class="heading">
+                <h1>Welcome to my Chatapp</h1>
+            </div>
+            <div class="register">
+                <input
+                    type="text"
+                    placeholder="Please enter your name: "
+                    id="username"
+                    class="inputField"
+                >
+                <button onclick="registerUser()" id="userButton" class="buttonStyle">commit</button>
+            </div>
+        </div>
+        <div class="chatContainer">
+            <div class="chat">
+                <div class="userContainer">
+                    <div class="userNameContainer">
+                        <p id="displayUsername" class="displayUser">Username:</p>
+                    </div>
+                    <div class="onlineContainer">
+                        <p id="onlineStatus" class="onlineStatus">User Online:</p>
+                    </div>
+                </div>
+                <div class="textField">
+                    <div class="messageField" id="messages"></div>
+                </div>
+                <div class="inputContainer">
+                    <input
+                        type="text"
+                        id="message"
+                        placeholder="Please enter your message: "
+                        class="inputField"
+                    >
+                    <button id="sendButton" onclick="sendMessage()" class="buttonStyle" disabled>send</button>
+                </div>
+            </div>
+        </div>
+
+        <template id="messageTemplate" class="messageTemplate">
+            <div class="messageContainer" id="messageContainer">
+                <div class="messageContent">
+                    <h3 class="user" id="user">User</h3>
+                    <span id="messageText">Text</span>
+                </div>
+            </div>
+        </template>
+        <template id="messageTemplate2" class="messageTemplate2">
+            <div class="messageContainer2" id="messageContainer2">
+                <div class="messageContent">
+                    <h3 class="user" id="user">User</h3>
+                    <span id="messageText">Text</span>
+                </div>
+            </div>
+        </template>
+        <template id="infoTemplate" class="infoTemplate">
+            <div class="messageContainer2" id="messageContainer2">
+                <span id="messageText">Text</span>
+            </div>
+        </template>
     </body>
 </html>
