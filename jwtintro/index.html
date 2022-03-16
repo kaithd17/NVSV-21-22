@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        window.onload = function () {
+            fetch("http://localhost:12345/auth", {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }
+            )
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Success</h1>
+    <form method="post" action="/">
+        <input type="hidden" id="authorization" />
+        <input type="submit" value="Verify" />
+    </form>
+</body>
+
+</html>
